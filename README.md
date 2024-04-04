@@ -49,9 +49,51 @@ It shows the distance of a random variable from its mean. It is calcualted as
 
 # Program :
 
+def construct_frequency_distribution(data):
+    frequency_distribution = {}
+    for value in data:
+        if value in frequency_distribution:
+            frequency_distribution[value] += 1
+        else:
+            frequency_distribution[value] = 1
+    return frequency_distribution
 
+def convert_to_probability_distribution(frequency_distribution, total_count):
+    probability_distribution = {value: count / total_count for value, count in frequency_distribution.items()}
+    return probability_distribution
+
+def calculate_mean(probability_distribution):
+    mean = sum(value * probability for value, probability in probability_distribution.items())
+    return mean
+
+def calculate_variance(probability_distribution, mean):
+    variance = sum((value - mean) ** 2 * probability for value, probability in probability_distribution.items())
+    return variance
+
+def main():
+
+    data = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5]
+    
+    frequency_distribution = construct_frequency_distribution(data)
+    total_count = sum(frequency_distribution.values())
+    
+    probability_distribution = convert_to_probability_distribution(frequency_distribution, total_count)
+   
+    mean = calculate_mean(probability_distribution)
+
+    variance = calculate_variance(probability_distribution, mean)
+    
+    print("Mean:", mean)
+    print("Variance:", variance)
+
+if __name__ == "__main__":
+    main()
 
 # Output : 
+Mean: 3.6666666666666665
+Variance: 1.5555555555555554
+
+=== Code Execution Successful ===
 
 # Results :
 The mean and variance of arrivals of objects from feeder using probability distribution are calculated.
